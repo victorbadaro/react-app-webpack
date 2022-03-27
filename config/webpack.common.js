@@ -3,14 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
-        bundle: path.resolve(__dirname, '..', 'src', 'index.jsx')
+        bundle: path.resolve(__dirname, '..', 'src', 'index.tsx')
     },
     output: {
         path: path.resolve(__dirname, '..', 'dist'),
         filename: '[name].[contenthash].js'
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.ts', '.tsx']
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -20,7 +20,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx$/,
+                test: /\.tsx$/,
                 exclude: /node_modules/,
                 use: 'babel-loader'
             }
