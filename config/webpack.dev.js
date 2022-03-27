@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 const path = require('path');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = merge(common, {
     mode: 'development',
@@ -12,5 +13,24 @@ module.exports = merge(common, {
         hot: true,
         port: 3000,
         open: true
+    },
+    plugins: [
+        new ReactRefreshWebpackPlugin()
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        plugins: [
+                            require.resolve('react-refresh/babel')
+                        ]
+                    }
+                }
+            }
+        ]
     }
 });
